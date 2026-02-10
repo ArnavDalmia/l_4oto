@@ -1,0 +1,46 @@
+backend:
+  name: git-gateway
+  branch: main # Change to your default branch if different
+
+media_folder: "assets/uploads" # Where images will be stored
+public_folder: "/assets/uploads" # Public path to images
+
+collections:
+  # Albums Collection
+  - name: "albums"
+    label: "Photo Albums"
+    folder: "content/albums"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Album Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text", required: false}
+      - {label: "Cover Image", name: "cover", widget: "image"}
+      - {label: "Photo Count", name: "count", widget: "number", default: 0}
+      - {label: "Order", name: "order", widget: "number", default: 1}
+      - label: "Photos"
+        name: "photos"
+        widget: "list"
+        fields:
+          - {label: "Image", name: "image", widget: "image"}
+          - {label: "Caption", name: "caption", widget: "string", required: false}
+          - {label: "Alt Text", name: "alt", widget: "string", required: false}
+
+  # Site Settings
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - label: "Profile Info"
+        name: "profile"
+        file: "content/settings/profile.json"
+        fields:
+          - {label: "Display Name", name: "name", widget: "string"}
+          - {label: "Stage Name", name: "stageName", widget: "string"}
+          - {label: "Profile Photo", name: "photo", widget: "image"}
+          - {label: "Hero Background", name: "heroImage", widget: "image"}
+          - {label: "Photography Hero", name: "photoHeroImage", widget: "image"}
+          - {label: "About Text - Paragraph 1", name: "about1", widget: "text"}
+          - {label: "About Text - Paragraph 2", name: "about2", widget: "text"}
+          - {label: "Email", name: "email", widget: "string"}
+          - {label: "Instagram Handle", name: "instagram", widget: "string"}
+          - {label: "LinkedIn URL", name: "linkedin", widget: "string"}

@@ -1,0 +1,15 @@
+# Netlify configuration file
+
+[build]
+  publish = "."
+  command = "echo 'No build command needed for static site'"
+
+# Redirect /admin to admin panel
+[[redirects]]
+  from = "/admin/*"
+  to = "/admin/:splat"
+  status = 200
+
+# Enable Identity service
+[build.environment]
+  NODE_VERSION = "18"
