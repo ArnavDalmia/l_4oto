@@ -141,11 +141,9 @@ function renderAlbums(albums) {
     });
 }
 
-// Open album detail (you can expand this later)
+// Open album detail page
 function openAlbum(slug) {
-    console.log('Opening album:', slug);
-    // For now, just log. Later you can create an album detail page
-    alert(`Album detail page coming soon!\nAlbum: ${slug}`);
+    window.location.href = `album.html?album=${slug}`;
 }
 
 // Initialize when page loads
