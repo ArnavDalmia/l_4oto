@@ -30,7 +30,7 @@ body {
     right: 0;
     background-color: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
-    padding: 1.5rem 0;
+    padding: 1rem 0;
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
@@ -183,14 +183,14 @@ body {
 }
 
 .photo-hero {
-    height: 60vh;
+    height: 45vh;
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(44, 44, 44, 1)), url('assets/photo-hero-bg.jpg');
     background-size: cover;
     background-position: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 80px;
+    margin-top: 65px;
 }
 
 .photo-hero-content {
@@ -213,7 +213,7 @@ body {
 
 /* Albums Grid */
 .albums {
-    padding: 5rem 0;
+    padding: 2.5rem 0 5rem;
     background-color: var(--dark-bg);
 }
 
@@ -349,10 +349,10 @@ body {
 
 /* Album Detail Page */
 .album-header {
-    padding: 8rem 0 3rem;
+    padding: 2rem 0 2rem;
     background-color: var(--dark-bg);
     text-align: center;
-    margin-top: 80px;
+    margin-top: 65px;
 }
 
 .back-link {
@@ -386,7 +386,7 @@ body {
 
 /* Photo Gallery */
 .photo-gallery {
-    padding: 4rem 0 6rem;
+    padding: 1rem 0 6rem;
     background-color: var(--dark-bg);
 }
 
@@ -537,17 +537,39 @@ body {
 }
 
 @media (max-width: 768px) {
+    .navbar {
+        padding: 0.75rem 0;
+    }
+
     .nav-container {
-        padding: 0 1.5rem;
+        padding: 0 1rem;
+    }
+
+    .logo {
+        font-size: 1.2rem;
     }
 
     .nav-menu {
-        gap: 1.5rem;
+        gap: 1rem;
+    }
+
+    .nav-link {
+        font-size: 0.9rem;
     }
 
     .hero-title,
     .photo-hero-title {
         font-size: 2.5rem;
+        padding: 0 1rem;
+    }
+
+    .photo-hero {
+        height: 35vh;
+        margin-top: 60px;
+    }
+
+    .photo-hero-subtitle {
+        font-size: 1rem;
     }
 
     .about {
@@ -562,25 +584,46 @@ body {
         font-size: 2rem;
     }
 
+    .albums {
+        padding: 1.5rem 0 4rem;
+    }
+
     .albums-container {
         grid-template-columns: 1fr;
-        padding: 0 1.5rem;
+        padding: 0 1rem;
+        gap: 1.5rem;
     }
 
     .footer-container {
         flex-direction: column;
         gap: 1.5rem;
         text-align: center;
+        padding: 0 1rem;
+    }
+
+    .album-header {
+        padding: 1.5rem 0 1.5rem;
+        margin-top: 60px;
     }
 
     .album-title-main {
-        font-size: 2.5rem;
+        font-size: 2rem;
+        padding: 0 1rem;
+    }
+
+    .back-link {
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+    }
+
+    .photo-gallery {
+        padding: 0.5rem 0 4rem;
     }
 
     .gallery-container {
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        grid-template-columns: 1fr;
         gap: 1rem;
-        padding: 0 1.5rem;
+        padding: 0 1rem;
     }
 
     .lightbox-prev {
@@ -595,5 +638,10 @@ body {
     .lightbox-prev,
     .lightbox-next {
         font-size: 2rem;
+        padding: 0.5rem;
+    }
+
+    .placeholder-section {
+        margin-top: 60px;
     }
 }
