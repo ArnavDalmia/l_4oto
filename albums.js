@@ -1,80 +1,10 @@
 // albums.js - Dynamically load albums from CMS data
 
-// Parse frontmatter from markdown files
-function parseFrontmatter(text) {
-    const match = text.match(/^---\s*\n([\s\S]*?)\n---/);
-    if (!match) return null;
-    
-    const frontmatter = {};
-    const lines = match[1].split('\n');
-    let currentKey = null;
-    let inList = false;
-    let listItems = [];
-    
-    lines.forEach(line => {
-        // Handle list items
-        if (line.trim().startsWith('- ')) {
-            if (line.includes(':')) {
-                // New object in list
-                if (listItems.length && Object.keys(listItems[listItems.length - 1]).length) {
-                    // Current object is complete, start new one
-                }
-                const [key, value] = line.substring(2).split(':').map(s => s.trim());
-                if (!listItems.length || Object.keys(listItems[listItems.length - 1]).length > 0) {
-                    listItems.push({});
-                }
-                listItems[listItems.length - 1][key] = value;
-            } else {
-                // Simple list item
-                listItems.push(line.substring(2).trim());
-            }
-            inList = true;
-        } else if (line.includes(':') && !line.startsWith(' ')) {
-            // Save previous list if exists
-            if (inList && currentKey && listItems.length) {
-                frontmatter[currentKey] = listItems;
-                listItems = [];
-                inList = false;
-            }
-            
-            // Parse key-value pair
-            const colonIndex = line.indexOf(':');
-            currentKey = line.substring(0, colonIndex).trim();
-            const value = line.substring(colonIndex + 1).trim();
-            
-            if (value) {
-                // Parse value - handle numbers and strings
-                if (!isNaN(value) && value !== '') {
-                    frontmatter[currentKey] = Number(value);
-                } else {
-                    frontmatter[currentKey] = value;
-                }
-            } else {
-                // Empty value means list might follow
-                inList = true;
-                listItems = [];
-            }
-        } else if (line.trim().startsWith('image:') || line.trim().startsWith('caption:') || line.trim().startsWith('alt:')) {
-            // Nested list properties
-            const [key, value] = line.trim().split(':').map(s => s.trim());
-            if (!listItems.length) listItems.push({});
-            listItems[listItems.length - 1][key] = value;
-        }
-    });
-    
-    // Save final list if exists
-    if (inList && currentKey && listItems.length) {
-        frontmatter[currentKey] = listItems;
-    }
-    
-    return frontmatter;
-}
-
 // Fetch and parse album data
 async function loadAlbums() {
     try {
         // Fetch the albums directory listing
-        const albumFiles = ['london-exchange.md']; // You can expand this or fetch dynamically
+        const albumFiles = ['london-exchange.json']; // You can expand this or fetch dynamically
         
         const albums = [];
         
@@ -83,8 +13,7 @@ async function loadAlbums() {
                 const response = await fetch(`/content/albums/${file}`);
                 if (!response.ok) continue;
                 
-                const text = await response.text();
-                const data = parseFrontmatter(text);
+                const data = await response.json();
                 
                 if (data) {
                     // Count actual photos
@@ -92,7 +21,7 @@ async function loadAlbums() {
                     albums.push({
                         ...data,
                         count: photoCount,
-                        slug: file.replace('.md', '')
+                        slug: file.replace('.json', '')
                     });
                 }
             } catch (err) {

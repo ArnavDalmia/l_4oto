@@ -12,6 +12,7 @@ collections:
     folder: "content/albums"
     create: true
     slug: "{{slug}}"
+    format: "json"
     fields:
       - {label: "Album Title", name: "title", widget: "string"}
       - {label: "Description", name: "description", widget: "text", required: false}
